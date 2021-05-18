@@ -17,7 +17,7 @@ describe('Department CRUD', () => {
 
     describe('Reading data', () => {
 
-        before(async () => {
+        beforeEach(async () => {
             const testDepOne = new Department({ name: 'Department #1' });
             await testDepOne.save();
 
@@ -37,7 +37,7 @@ describe('Department CRUD', () => {
             expect(department.name).to.be.equal(expectedName);
         });
 
-        after(async () => {
+        afterEach(async () => {
             await Department.deleteMany();
         });
     });

@@ -21,24 +21,21 @@ describe('Employees CRUD', () => {
             const testEmpOne = new Employees({ firstName: 'John', lastName: 'Doe', department: 'Testing' });
             await testEmpOne.save();
 
-            const testEmpTwo = new Employees({ firstName: 'Amanda', lastName: 'Doe', department: 'Marketing' });
+            const testEmpTwo = new Employees({ firstName: 'Amanda', lastName: 'Doe', department: 'Nothing' });
             await testEmpTwo.save();
         });
 
         it('should return all the data with "find" method', async () => {
             const employees = await Employees.find();
-            const expectedLength = 2;
-            expect(employees.length).to.be.equal(expectedLength);
+
+            expect(employees.length).to.be.equal(1);
         });
 
         it('should return proper document by various params with "findOne" method', async () => {
-            const employee = await Employees.findOne({ firstName: 'John', lastName: 'Doe' });
+            const employee = await Employees.findOne({ firstName: 'John' });
             const expectedFirstName = 'John';
-            const expectedLastName = 'Doe';
             expect(employee.firstName).to.be.equal(expectedFirstName);
-            expect(employee.lastName).to.be.equal(expectedLastName);
         });
-
         afterEach(async () => {
             await Employees.deleteMany();
         });
